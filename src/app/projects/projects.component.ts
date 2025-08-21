@@ -1,4 +1,6 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, HostListener } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ScrollService } from '../scroll.service';
 
 @Component({
   selector: 'app-projects',
@@ -12,37 +14,66 @@ export class ProjectsComponent implements OnInit, OnDestroy, AfterViewInit {
   private currentIndex = 1;
   private slideWidth!: number;
   private intervalId: any;
+  private slides: any[] = [];
+  private scrollSubscription!: Subscription;
 
-  constructor() { }
+  @HostListener('window:resize')
+  onResize() {
+    this.updateSlideWidth();
+    this.track.nativeElement.style.transition = 'none';
+    this.track.nativeElement.style.transform = `translateX(-${this.slideWidth * this.currentIndex}px)`;
+  }
+
+  constructor(
+    private scrollService: ScrollService,
+    private elementRef: ElementRef
+  ) {}
 
   ngOnInit(): void {
+    this.scrollSubscription = this.scrollService.scrollToSection$.subscribe(sectionId => {
+      if (sectionId === 'projects') {
+        this.elementRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
   }
 
   ngAfterViewInit(): void {
-    this.setupCarousel();
+    setTimeout(() => {
+      this.setupCarousel();
+    });
   }
 
   ngOnDestroy(): void {
     this.stopAutoScroll();
+    if (this.scrollSubscription) {
+      this.scrollSubscription.unsubscribe();
+    }
+  }
+
+  updateSlideWidth(): void {
+    this.slideWidth = this.carousel.nativeElement.clientWidth;
   }
 
   setupCarousel(): void {
-    const slides = Array.from(this.track.nativeElement.children);
-    if (slides.length === 0) return;
+    const originalSlides = Array.from(this.track.nativeElement.children);
+    if (originalSlides.length <= 1) return;
 
-    const firstClone = (slides[0] as HTMLElement).cloneNode(true);
-    const lastClone = (slides[slides.length - 1] as HTMLElement).cloneNode(true);
+    const firstClone = (originalSlides[0] as HTMLElement).cloneNode(true);
+    const lastClone = (originalSlides[originalSlides.length - 1] as HTMLElement).cloneNode(true);
 
     this.track.nativeElement.append(firstClone);
     this.track.nativeElement.prepend(lastClone);
 
-    this.slideWidth = (slides[0] as HTMLElement).getBoundingClientRect().width;
+    this.slides = Array.from(this.track.nativeElement.children);
+    this.updateSlideWidth();
+
     this.track.nativeElement.style.transform = `translateX(-${this.slideWidth * this.currentIndex}px)`;
 
     this.startAutoScroll();
   }
 
   moveToSlide(index: number): void {
+    if (!this.track) return;
     this.track.nativeElement.style.transition = 'transform 0.5s ease-in-out';
     this.track.nativeElement.style.transform = `translateX(-${this.slideWidth * index}px)`;
     this.currentIndex = index;
@@ -50,24 +81,30 @@ export class ProjectsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   nextSlide(): void {
     this.moveToSlide(this.currentIndex + 1);
-    this.stopAutoScroll();
-    this.startAutoScroll();
   }
 
   prevSlide(): void {
     this.moveToSlide(this.currentIndex - 1);
+  }
+
+  handleManualNavigation(direction: 'next' | 'prev'): void {
     this.stopAutoScroll();
+    if (direction === 'next') {
+      this.nextSlide();
+    } else {
+      this.prevSlide();
+    }
     this.startAutoScroll();
   }
 
   onTransitionEnd(): void {
-    const slides = Array.from(this.track.nativeElement.children);
     if (this.currentIndex === 0) {
       this.track.nativeElement.style.transition = 'none';
-      this.currentIndex = slides.length - 2;
+      this.currentIndex = this.slides.length - 2;
       this.track.nativeElement.style.transform = `translateX(-${this.slideWidth * this.currentIndex}px)`;
     }
-    if (this.currentIndex === slides.length - 1) {
+
+    if (this.currentIndex >= this.slides.length - 1) {
       this.track.nativeElement.style.transition = 'none';
       this.currentIndex = 1;
       this.track.nativeElement.style.transform = `translateX(-${this.slideWidth * this.currentIndex}px)`;
@@ -75,8 +112,9 @@ export class ProjectsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   startAutoScroll(): void {
+    this.stopAutoScroll();
     this.intervalId = setInterval(() => {
-      this.moveToSlide(this.currentIndex + 1);
+      this.nextSlide();
     }, 5000);
   }
 

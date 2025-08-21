@@ -1,3 +1,10 @@
+/* A modern CSS reset for more predictable layouts */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
     font-family: 'Inter', sans-serif;
 }
