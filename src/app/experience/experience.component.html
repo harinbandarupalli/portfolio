@@ -1,0 +1,64 @@
+<section id="experience">
+    <h2 class="text-3xl font-bold mb-6 text-center md:text-left">Professional Experience</h2>
+    <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
+
+        <!-- Desktop (Horizontal) Layout -->
+        <div class="timeline-wrapper-desktop" aria-label="Professional Experience Timeline">
+            <div #timelineContainer class="timeline-scroll-container" aria-label="Timeline Scrollable Area">
+                <div class="timeline-line" aria-hidden="true"></div>
+                <div class="nodes-container">
+                    <div #nodes *ngFor="let experience of experiences; let i = index"
+                         class="timeline-item"
+                         (click)="selectNode(i, 'desktop')"
+                         role="listitem"
+                         [attr.aria-current]="activeNode === i ? 'step' : null"
+                         [attr.tabindex]="activeNode === i ? 0 : -1">
+                        <div class="timeline-node-wrapper">
+                            <i class="timeline-node {{ experience.icon }}" [class.active]="activeNode === i" [attr.aria-label]="experience.company"></i>
+                        </div>
+                        <div class="company-name">{{ experience.company }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-panel-desktop" *ngIf="experiences.length > 0" aria-live="polite">
+                <h2 class="company">{{ experiences[activeNode].company }}</h2>
+                <h3 class="role">{{ experiences[activeNode].role }}</h3>
+                <p class="duration">{{ experiences[activeNode].startDate }} – {{ experiences[activeNode].endDate }}</p>
+                <hr class="divider">
+                <ul class="responsibilities">
+                    <li *ngFor="let responsibility of experiences[activeNode].responsibilities">
+                        {{ responsibility }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Mobile (Horizontal) Layout -->
+        <div class="timeline-wrapper-mobile">
+            <div #mobileTimelineContainer class="timeline-scroll-container-mobile">
+                <div class="nodes-container-mobile">
+                    <div #mobileNodes *ngFor="let experience of experiences; let i = index"
+                         class="timeline-item-mobile"
+                         (click)="selectNode(i, 'mobile')"
+                         [attr.aria-current]="activeNode === i ? 'step' : null"
+                         [attr.data-index]="i">
+                        <i class="timeline-node-mobile {{ experience.icon }}" [class.active]="activeNode === i"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-panel-mobile" *ngIf="experiences.length > 0">
+                <h3 class="company">{{ experiences[activeNode].company }}</h3>
+                <p class="role">{{ experiences[activeNode].role }}</p>
+                <p class="duration">{{ experiences[activeNode].startDate }} – {{ experiences[activeNode].endDate }}</p>
+                <ul class="responsibilities">
+                    <li *ngFor="let responsibility of experiences[activeNode].responsibilities">
+                        {{ responsibility }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</section>

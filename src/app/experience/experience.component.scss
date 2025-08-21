@@ -1,0 +1,231 @@
+// --- General Styles ---
+:host {
+  display: block;
+  margin-bottom: 3rem;
+}
+
+// --- Mobile First ---
+.timeline-wrapper-desktop {
+  display: none; // Hide desktop by default
+}
+
+.timeline-wrapper-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.timeline-scroll-container-mobile {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+}
+
+.nodes-container-mobile {
+  display: flex;
+  align-items: center;
+  padding: 0 calc(50% - 20px); // Center the snapped item (half container - half node width)
+  gap: 1.5rem;
+}
+
+.timeline-item-mobile {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+}
+
+.timeline-node-mobile {
+  width: 2.5rem; // 40px
+  height: 2.5rem; // 40px
+  background-color: #4b5563; // gray-600
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: #1f2937; // gray-800
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &.active {
+    background-color: #f97316; // orange-500
+    color: #ffffff;
+    transform: scale(1.15);
+  }
+}
+
+.details-panel-mobile {
+  padding: 1rem;
+  color: #d1d5db;
+  background-color: #1f2937;
+  border-radius: 0.5rem;
+  border: 1px solid #374151;
+  text-align: left;
+
+  .company {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #f3f4f6;
+  }
+
+  .role {
+    font-size: 1rem;
+    color: #d1d5db;
+    margin-bottom: 0.25rem;
+  }
+
+  .duration {
+    font-style: italic;
+    color: #9ca3af;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  .responsibilities {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+
+// --- Desktop Styles (md breakpoint: 768px) ---
+@media (min-width: 768px) {
+  .timeline-wrapper-mobile {
+    display: none; // Hide mobile on desktop
+  }
+
+  .timeline-wrapper-desktop {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 2rem;
+  }
+
+  .timeline-scroll-container {
+    overflow-x: auto;
+    position: relative;
+    padding: 2rem 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+  }
+
+  .timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #374151;
+    transform: translateY(-50%);
+  }
+
+  .nodes-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 4rem;
+    position: relative;
+    z-index: 1;
+    padding: 0 calc(50% - 75px); // Center the snapped item (half of container - half of item width)
+  }
+
+  .timeline-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    flex-shrink: 0;
+    width: 150px;
+    position: relative;
+    scroll-snap-align: center;
+  }
+
+  .timeline-node-wrapper {
+    position: relative;
+    z-index: 2;
+  }
+
+  .timeline-node {
+    width: clamp(3rem, 5vw, 3.5rem);
+    height: clamp(3rem, 5vw, 3.5rem);
+    font-size: clamp(1.5rem, 3vw, 1.75rem);
+    background-color: #4b5563;
+    border-radius: 50%;
+    border: 4px solid #111827;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111827;
+
+    &.active {
+      background-color: #f97316;
+      transform: scale(1.1);
+      border-color: #f97316;
+      box-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
+      color: #ffffff;
+    }
+  }
+
+  .company-name {
+    margin-top: 1rem;
+    color: #9ca3af;
+    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .timeline-item[aria-current='step'] .company-name {
+    color: #f3f4f6;
+    font-weight: 700;
+  }
+
+  .details-panel-desktop {
+    padding: 2rem;
+    background-color: #1f2937;
+    border-radius: 0.5rem;
+    border: 1px solid #374151;
+    color: #d1d5db;
+    grid-column: 1 / -1;
+
+    .company {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f3f4f6;
+    }
+
+    .role {
+      font-size: 1.125rem;
+      color: #d1d5db;
+      margin-bottom: 0.25rem;
+    }
+
+    .duration {
+      font-style: italic;
+      color: #9ca3af;
+      margin-bottom: 1rem;
+    }
+
+    .divider {
+      border-color: #374151;
+      margin-bottom: 1rem;
+    }
+
+    .responsibilities {
+      list-style-type: disc;
+      padding-left: 1.25rem;
+      li {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}

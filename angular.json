@@ -23,7 +23,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/swiper/swiper-bundle.min.css"
             ],
             "scripts": []
           },
@@ -99,6 +100,6 @@
     }
   },
   "cli": {
-    "analytics": "6e1b94f0-147b-442b-b881-082970a918b6"
+    "analytics": "ba8ddceb-706b-4986-8918-9f29469f6d2a"
   }
 }
