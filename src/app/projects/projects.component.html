@@ -1,0 +1,75 @@
+<section>
+    <h2 class="text-3xl font-bold mb-6 text-center md:text-left">Featured Projects</h2>
+    <div #carousel class="carousel-container bg-gray-800/50 border border-gray-700 rounded-lg" (mouseenter)="stopAutoScroll()" (mouseleave)="startAutoScroll()">
+        <div #track class="carousel-track" (transitionend)="onTransitionEnd()">
+            <!-- Slide 1 -->
+            <div class="carousel-slide p-6">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-2/3 h-80 placeholder-box rounded-md"><span>Project 1 Screenshot</span></div>
+                    <div class="w-full md:w-1/3">
+                        <h3 class="text-2xl font-semibold text-orange-400">Project Title One</h3>
+                        <p class="mt-2 text-gray-400">Description for the first featured project. Duis aute irure dolor in reprehenderit.</p>
+                        <div class="mt-6 flex space-x-4">
+                            <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg">View Project</button>
+                            <button class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg">Case Study</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-slide p-6">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-2/3 h-80 placeholder-box rounded-md"><span>Project 2 Screenshot</span></div>
+                    <div class="w-full md:w-1/3">
+                        <h3 class="text-2xl font-semibold text-orange-400">Project Title Two</h3>
+                        <p class="mt-2 text-gray-400">Description for the second featured project. Consectetur adipiscing elit.</p>
+                        <div class="mt-6 flex space-x-4">
+                            <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg">View Project</button>
+                            <button class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg">Case Study</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-slide p-6">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-2/3 h-80 placeholder-box rounded-md"><span>Project 3 Screenshot</span></div>
+                    <div class="w-full md:w-1/3">
+                        <h3 class="text-2xl font-semibold text-orange-400">Project Title Three</h3>
+                        <p class="mt-2 text-gray-400">Description for the third featured project. Sed do eiusmod tempor incididunt.</p>
+                        <div class="mt-6 flex space-x-4">
+                            <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg">View Project</button>
+                            <button class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-lg">Case Study</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-btn prev" (click)="prevSlide()">&#10094;</button>
+        <button class="carousel-btn next" (click)="nextSlide()">&#10095;</button>
+    </div>
+</section>
+
+<section>
+     <h2 class="text-3xl font-bold mb-6 text-center md:text-left">More Projects</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
+            <div class="h-48 placeholder-box rounded-md"><span>Project Image</span></div>
+            <h3 class="text-xl font-semibold mt-4">Project Title</h3>
+            <p class="text-gray-400 mt-2 text-sm">Short project description goes here.</p>
+            <button class="mt-4 w-full bg-gray-700 hover:bg-gray-600 text-orange-400 font-semibold py-2 px-4 rounded-lg">View Details</button>
+        </div>
+        <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
+            <div class="h-48 placeholder-box rounded-md"><span>Project Image</span></div>
+            <h3 class="text-xl font-semibold mt-4">Project Title</h3>
+            <p class="text-gray-400 mt-2 text-sm">Short project description goes here.</p>
+            <button class="mt-4 w-full bg-gray-700 hover:bg-gray-600 text-orange-400 font-semibold py-2 px-4 rounded-lg">View Details</button>
+        </div>
+        <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-4">
+            <div class="h-48 placeholder-box rounded-md"><span>Project Image</span></div>
+            <h3 class="text-xl font-semibold mt-4">Project Title</h3>
+            <p class="text-gray-400 mt-2 text-sm">Short project description goes here.</p>
+            <button class="mt-4 w-full bg-gray-700 hover:bg-gray-600 text-orange-400 font-semibold py-2 px-4 rounded-lg">View Details</button>
+        </div>
+    </div>
+</section>

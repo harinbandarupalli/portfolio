@@ -1,0 +1,12 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+.placeholder-box {
+    background-color: #4A5568; /* gray-700 */
+    border: 2px dashed #A0AEC0; /* gray-400 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #E2E8F0; /* gray-300 */
+    font-size: 0.875rem;
+}
