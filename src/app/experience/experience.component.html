@@ -1,64 +1,57 @@
-<section id="experience">
-    <h2 class="text-3xl font-bold mb-6 text-center md:text-left">Professional Experience</h2>
-    <div class="bg-gray-800/50 border border-gray-700 rounded-lg p-6">
+<section id="experience" class="py-24 bg-slate-900">
+    <div class="container mx-auto px-6">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+        {{experienceContent?.title.split(' ')[0]}} <span class="text-purple-400">{{experienceContent?.title.split(' ')[1]}}</span>
+      </h2>
 
-        <!-- Desktop (Horizontal) Layout -->
-        <div class="timeline-wrapper-desktop" aria-label="Professional Experience Timeline">
-            <div #timelineContainer class="timeline-scroll-container" aria-label="Timeline Scrollable Area">
-                <div class="timeline-line" aria-hidden="true"></div>
-                <div class="nodes-container">
-                    <div #nodes *ngFor="let experience of experiences; let i = index"
-                         class="timeline-item"
-                         (click)="selectNode(i, 'desktop')"
-                         role="listitem"
-                         [attr.aria-current]="activeNode === i ? 'step' : null"
-                         [attr.tabindex]="activeNode === i ? 0 : -1">
-                        <div class="timeline-node-wrapper">
-                            <i class="timeline-node {{ experience.icon }}" [class.active]="activeNode === i" [attr.aria-label]="experience.company"></i>
-                        </div>
-                        <div class="company-name">{{ experience.company }}</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="details-panel-desktop" *ngIf="experiences.length > 0" aria-live="polite">
-                <h2 class="company">{{ experiences[activeNode].company }}</h2>
-                <h3 class="role">{{ experiences[activeNode].role }}</h3>
-                <p class="duration">{{ experiences[activeNode].startDate }} – {{ experiences[activeNode].endDate }}</p>
-                <hr class="divider">
-                <ul class="responsibilities">
-                    <li *ngFor="let responsibility of experiences[activeNode].responsibilities">
-                        {{ responsibility }}
-                    </li>
-                </ul>
-            </div>
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Company List -->
+        <div class="space-y-4">
+          <button
+            *ngFor="let job of experienceContent?.jobs; let i = index"
+            (click)="selectExperience(i)"
+            class="w-full text-left p-6 rounded-xl transition-all duration-300"
+            [ngClass]="{'bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg text-white': selectedExperience === i, 'bg-slate-800 hover:bg-slate-700 text-gray-300': selectedExperience !== i}"
+          >
+            <h3 class="font-bold text-lg">{{job.company}}</h3>
+            <p class="text-sm mt-1">{{job.duration}}</p>
+          </button>
         </div>
 
-        <!-- Mobile (Horizontal) Layout -->
-        <div class="timeline-wrapper-mobile">
-            <div #mobileTimelineContainer class="timeline-scroll-container-mobile">
-                <div class="nodes-container-mobile">
-                    <div #mobileNodes *ngFor="let experience of experiences; let i = index"
-                         class="timeline-item-mobile"
-                         (click)="selectNode(i, 'mobile')"
-                         [attr.aria-current]="activeNode === i ? 'step' : null"
-                         [attr.data-index]="i">
-                        <i class="timeline-node-mobile {{ experience.icon }}" [class.active]="activeNode === i"></i>
-                    </div>
+        <!-- Experience Details -->
+        <div class="lg:col-span-2 bg-slate-800 rounded-2xl p-8">
+          <div class="space-y-6" *ngIf="experienceContent?.jobs.length > 0">
+            <div>
+              <h3 class="text-2xl font-bold text-blue-400">
+                {{experienceContent?.jobs[selectedExperience].role}}
+              </h3>
+              <div class="flex flex-wrap items-center gap-4 mt-2 text-gray-300">
+                <div class="flex items-center gap-1">
+                  <lucide-icon name="Calendar" class="w-4 h-4"></lucide-icon>
+                  {{experienceContent?.jobs[selectedExperience].duration}}
                 </div>
+                <div class="flex items-center gap-1">
+                  <lucide-icon name="MapPin" class="w-4 h-4"></lucide-icon>
+                  {{experienceContent?.jobs[selectedExperience].location}}
+                </div>
+              </div>
             </div>
 
-            <div class="details-panel-mobile" *ngIf="experiences.length > 0">
-                <h3 class="company">{{ experiences[activeNode].company }}</h3>
-                <p class="role">{{ experiences[activeNode].role }}</p>
-                <p class="duration">{{ experiences[activeNode].startDate }} – {{ experiences[activeNode].endDate }}</p>
-                <ul class="responsibilities">
-                    <li *ngFor="let responsibility of experiences[activeNode].responsibilities">
-                        {{ responsibility }}
-                    </li>
-                </ul>
+            <p class="text-gray-300 leading-relaxed">
+              {{experienceContent?.jobs[selectedExperience].description}}
+            </p>
+
+            <div>
+              <h4 class="font-semibold text-white mb-3">Key Achievements:</h4>
+              <ul class="space-y-2">
+                <li *ngFor="let highlight of experienceContent?.jobs[selectedExperience].highlights" class="flex items-start gap-2 text-gray-300">
+                  <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
+                  {{highlight}}
+                </li>
+              </ul>
             </div>
+          </div>
         </div>
-
+      </div>
     </div>
-</section>
+  </section>

@@ -1,0 +1,759 @@
+
+import React, { useState, useEffect } from 'react';
+import { Menu, X, ChevronLeft, ChevronRight, Download, ExternalLink, Mail, Github, Linkedin, MapPin, Calendar } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+
+export default function Portfolio() {
+const [isMenuOpen, setIsMenuOpen] = useState(false);
+const [activeSection, setActiveSection] = useState('home');
+const [selectedExperience, setSelectedExperience] = useState(0);
+const [currentProject, setCurrentProject] = useState(1); // Start at 1 for the cloned slide
+const [transitionEnabled, setTransitionEnabled] = useState(true);
+const [formData, setFormData] = useState({
+name: '',
+email: '',
+subject: '',
+message: ''
+});
+const [isSubmitting, setIsSubmitting] = useState(false);
+
+const experiences = [
+{
+company: "Tech Innovations Inc.",
+role: "Senior Full Stack Developer",
+duration: "2022 - Present",
+location: "San Francisco, CA",
+description: "Leading development of scalable web applications using React, Node.js, and cloud technologies. Mentoring junior developers and architecting solutions for enterprise clients.",
+highlights: ["Led team of 5 developers", "Reduced load times by 40%", "Implemented CI/CD pipelines"]
+},
+{
+company: "Digital Solutions Co.",
+role: "Frontend Developer",
+duration: "220 - 2022",
+location: "New York, NY",
+description: "Specialized in creating responsive user interfaces and optimizing user experience. Collaborated with design teams to implement pixel-perfect designs.",
+highlights: ["Built 15+ responsive websites", "Improved UX metrics by 25%", "Mentored 3 interns"]
+},
+{
+company: "StartupTech",
+role: "Junior Developer",
+duration: "2019 - 2020",
+location: "Austin, TX",
+description: "Started career building web applications and learning modern development practices. Contributed to multiple client projects and internal tools.",
+highlights: ["Delivered 8 client projects", "Learned React & Node.js", "Perfect attendance record"]
+}
+];
+
+const projects = [
+{
+title: "E-Commerce Platform",
+description: "Full-stack marketplace with real-time chat, payment processing, and admin dashboard. Built with React, Node.js, and MongoDB.",
+image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop",
+liveUrl: "https://example.com",
+caseStudyUrl: "https://example.com/case-study",
+tags: ["React", "Node.js", "MongoDB", "Stripe"]
+},
+{
+title: "Task Management App",
+description: "Collaborative project management tool with drag-and-drop functionality, team chat, and analytics dashboard.",
+image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
+liveUrl: "https://example.com",
+caseStudyUrl: "https://example.com/case-study",
+tags: ["Vue.js", "Firebase", "Chart.js"]
+},
+{
+title: "AI Content Generator",
+description: "Web application that generates marketing content using AI. Features custom templates, export options, and team collaboration.",
+image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+liveUrl: "https://example.com",
+caseStudyUrl: "https://example.com/case-study",
+tags: ["React", "OpenAI API", "TypeScript"]
+}
+];
+
+const extendedProjects = [projects[projects.length - 1], ...projects, projects[0]];
+const transitionDuration = 500;
+
+useEffect(() => {
+const handleScroll = () => {
+const sections = ['home', 'about', 'experience', 'projects', 'connect'];
+const scrollPosition = window.scrollY + 100;
+
+sections.forEach(section => {
+const element = document.getElementById(section);
+if (element) {
+const offsetTop = element.offsetTop;
+const height = element.offsetHeight;
+
+if (scrollPosition >= offsetTop && scrollPosition < offsetTop + height) {
+setActiveSection(section);
+}
+}
+});
+};
+
+window.addEventListener('scroll', handleScroll);
+return () => window.removeEventListener('scroll', handleScroll);
+}, []);
+
+// Effect to handle the "jump" back to the real slides for infinite loop
+useEffect(() => {
+if (currentProject === 0 || currentProject === extendedProjects.length - 1) {
+const timer = setTimeout(() => {
+setTransitionEnabled(false);
+const newIndex = currentProject === 0 ? projects.length : 1;
+setCurrentProject(newIndex);
+}, transitionDuration);
+return () => clearTimeout(timer);
+}
+}, [currentProject, projects.length, extendedProjects.length]);
+
+// Re-enable transition after the jump
+useEffect(() => {
+if (!transitionEnabled) {
+const timer = setTimeout(() => setTransitionEnabled(true), 50);
+return () => clearTimeout(timer);
+}
+}, [transitionEnabled]);
+
+const scrollToSection = (sectionId) => {
+const element = document.getElementById(sectionId);
+if (element) {
+element.scrollIntoView({ behavior: 'smooth' });
+}
+setIsMenuOpen(false);
+};
+
+const nextProject = () => {
+if (!transitionEnabled) return;
+setCurrentProject((prev) => prev + 1);
+};
+
+const prevProject = () => {
+if (!transitionEnabled) return;
+setCurrentProject((prev) => prev - 1);
+};
+
+const goToProject = (index) => {
+if (!transitionEnabled) return;
+setCurrentProject(index + 1);
+};
+
+// Auto-play carousel
+useEffect(() => {
+const interval = setInterval(() => {
+if (transitionEnabled) {
+nextProject();
+}
+}, 4000);
+return () => clearInterval(interval);
+}, [transitionEnabled, nextProject]); // nextProject is stable enough not to cause re-renders if wrapped in useCallback, but for simple function it's fine.
+
+const handleInputChange = (e) => {
+setFormData({
+...formData,
+[e.target.name]: e.target.value
+});
+};
+
+const handleSubmit = async (e) => {
+e.preventDefault();
+setIsSubmitting(true);
+
+// Simulate form submission
+setTimeout(() => {
+alert('Thank you for your message! I\'ll get back to you soon.');
+setFormData({ name: '', email: '', subject: '', message: '' });
+setIsSubmitting(false);
+}, 2000);
+};
+
+const getActualIndex = () => {
+if (currentProject === 0) return projects.length - 1; // If on the cloned last slide
+if (currentProject > projects.length) return 0; // If on the cloned first slide (after transition to extendedProjects.length)
+return currentProject - 1; // For actual slides, subtract 1 due to the prepended clone
+};
+
+return (
+<div className="min-h-screen bg-slate-900 text-white">
+  {/* Navigation */}
+  <nav className="fixed top-0 w-full bg-slate-900/95 backdrop-blur-md z-50 border-b border-slate-800">
+    <div className="container mx-auto px-6 py-4">
+      <div className="flex justify-between items-center">
+        <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          JS
+        </div>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex space-x-8">
+          {['home', 'about', 'experience', 'projects', 'connect'].map((item) => (
+          <button
+            key={item}
+            onClick={() => scrollToSection(item)}
+          className={`capitalize transition-all duration-300 hover:text-blue-400 ${
+          activeSection === item ? 'text-blue-400 font-semibold' : 'text-gray-300'
+          }`}
+          >
+          {item}
+          </button>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className="md:hidden p-2 rounded-lg hover:bg-slate-800 transition-colors"
+        >
+        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Navigation */}
+      {isMenuOpen && (
+      <div className="md:hidden absolute top-full left-0 w-full bg-slate-900 border-t border-slate-800 py-4">
+        {['home', 'about', 'experience', 'projects', 'connect'].map((item) => (
+        <button
+          key={item}
+          onClick={() => scrollToSection(item)}
+        className="block w-full text-left px-6 py-3 capitalize hover:bg-slate-800 transition-colors"
+        >
+        {item}
+        </button>
+        ))}
+      </div>
+      )}
+    </div>
+  </nav>
+
+  {/* Hero Section */}
+  <section id="home" className="min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900">
+    <div className="container mx-auto px-6 py-20">
+      <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="w-48 h-48 md:w-64 md:h-64 mx-auto md:mx-0">
+          <img
+            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
+            alt="Profile"
+            className="w-full h-full rounded-full object-cover border-4 border-white/20 shadow-2xl"
+          />
+        </div>
+
+        <div className="text-center md:text-left space-y-6">
+          <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+            <span className="block">John</span>
+            <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  Smith
+                </span>
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-300 font-light">
+            Full Stack Developer & UI/UX Enthusiast
+          </p>
+          <p className="text-lg text-gray-400 max-w-lg">
+            Crafting digital experiences that blend beautiful design with powerful functionality.
+            Passionate about creating solutions that make a difference.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 pt-6">
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+              onClick={() => scrollToSection('projects')}
+            >
+            View My Work
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-white/30 text-white hover:bg-white hover:text-slate-900 px-8 py-3 rounded-full font-semibold transition-all duration-300"
+            >
+              <Download className="w-5 h-5 mr-2" />
+              Download CV
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* About Section */}
+  <section id="about" className="py-24 bg-slate-800">
+    <div className="container mx-auto px-6">
+      <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="space-y-6">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8">
+            About <span className="text-blue-400">Me</span>
+          </h2>
+          <p className="text-lg text-gray-300 leading-relaxed">
+            I'm a passionate full-stack developer with over 5 years of experience creating
+            digital solutions that solve real-world problems. My journey started with a
+            curiosity for how things work and evolved into a love for building applications
+            that users genuinely enjoy.
+          </p>
+          <p className="text-lg text-gray-300 leading-relaxed">
+            When I'm not coding, you'll find me exploring new technologies, contributing to
+            open-source projects, or sharing knowledge with the developer community. I believe
+            in writing clean, maintainable code and creating experiences that are both
+            functional and delightful.
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-8">
+            {['React', 'Node.js', 'TypeScript', 'MongoDB', 'AWS', 'Docker'].map((skill) => (
+            <div key={skill} className="text-center p-4 bg-slate-700 rounded-xl hover:bg-slate-600 transition-colors">
+              <div className="font-semibold text-blue-400">{skill}</div>
+            </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative">
+          <img
+            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=700&fit=crop"
+            alt="Workspace"
+            className="rounded-2xl shadow-2xl"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent rounded-2xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Experience Section - Interactive Cards */}
+  <section id="experience" className="py-24 bg-slate-900">
+    <div className="container mx-auto px-6">
+      <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+        Professional <span className="text-purple-400">Experience</span>
+      </h2>
+
+      <div className="grid lg:grid-cols-3 gap-8">
+        {/* Company List */}
+        <div className="space-y-4">
+          {experiences.map((exp, index) => (
+          <button
+            key={index}
+            onClick={() => setSelectedExperience(index)}
+          className={`w-full text-left p-6 rounded-xl transition-all duration-300 ${
+          selectedExperience === index
+          ? 'bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg text-white'
+          : 'bg-slate-800 hover:bg-slate-700 text-gray-300'
+          }`}
+          >
+          <h3 className="font-bold text-lg">{exp.company}</h3>
+          <p className="text-sm mt-1">{exp.duration}</p>
+          </button>
+          ))}
+        </div>
+
+        {/* Experience Details */}
+        <div className="lg:col-span-2 bg-slate-800 rounded-2xl p-8">
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-2xl font-bold text-blue-400">
+                {experiences[selectedExperience].role}
+              </h3>
+              <div className="flex flex-wrap items-center gap-4 mt-2 text-gray-300">
+                <div className="flex items-center gap-1">
+                  <Calendar className="w-4 h-4" />
+                  {experiences[selectedExperience].duration}
+                </div>
+                <div className="flex items-center gap-1">
+                  <MapPin className="w-4 h-4" />
+                  {experiences[selectedExperience].location}
+                </div>
+              </div>
+            </div>
+
+            <p className="text-gray-300 leading-relaxed">
+              {experiences[selectedExperience].description}
+            </p>
+
+            <div>
+              <h4 className="font-semibold text-white mb-3">Key Achievements:</h4>
+              <ul className="space-y-2">
+                {experiences[selectedExperience].highlights.map((highlight, index) => (
+                <li key={index} className="flex items-start gap-2 text-gray-300">
+                  <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
+                  {highlight}
+                </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Projects Section */}
+  <section id="projects" className="py-24 bg-slate-800">
+    <div className="container mx-auto px-6">
+      <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+        Featured <span className="text-blue-400">Projects</span>
+      </h2>
+
+      <div className="relative max-w-5xl mx-auto">
+        {/* Main Carousel Container */}
+        <div className="relative overflow-hidden rounded-2xl bg-slate-900 shadow-2xl">
+          <div
+            className={`flex ${transitionEnabled ? `transition-transform duration-[${transitionDuration}ms] ease-in-out` : ''}`}
+          style={{
+          transform: `translateX(-${currentProject * 100}%)`,
+          }}
+          >
+          {extendedProjects.map((project, index) => (
+          <div
+            key={index}
+            className="w-full flex-shrink-0"
+          >
+            <div className="grid md:grid-cols-2 min-h-[500px]">
+              {/* Project Image */}
+              <div className="relative overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent"></div>
+              </div>
+
+              {/* Project Info */}
+              <div className="p-8 md:p-12 flex flex-col justify-center space-y-6">
+                <div className="space-y-4">
+                  <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+                    {project.title}
+                  </h3>
+                  <p className="text-lg text-gray-300 leading-relaxed">
+                    {project.description}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-3">
+                  {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-4 py-2 bg-slate-700 text-blue-400 rounded-full text-sm font-medium border border-slate-600"
+                  >
+                              {tag}
+                            </span>
+                  ))}
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 flex-1 py-3 rounded-xl font-semibold">
+                    <ExternalLink className="w-5 h-5 mr-2" />
+                    View Live Project
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="border-2 border-slate-600 text-gray-300 hover:bg-slate-700 hover:border-slate-500 flex-1 py-3 rounded-xl font-semibold"
+                  >
+                    Read Case Study
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={prevProject}
+        className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-slate-900/90 hover:bg-slate-800 text-white p-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl z-10"
+      >
+        <ChevronLeft className="w-6 h-6" />
+      </button>
+      <button
+        onClick={nextProject}
+        className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-slate-900/90 hover:bg-slate-800 text-white p-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl z-10"
+      >
+        <ChevronRight className="w-6 h-6" />
+      </button>
+    </div>
+
+    {/* Dots Indicator */}
+    <div className="flex justify-center gap-3 mt-8">
+      {projects.map((_, index) => (
+      <button
+        key={index}
+        onClick={() => goToProject(index)}
+      className={`w-4 h-4 rounded-full transition-all duration-300 ${
+      index === getActualIndex()
+      ? 'bg-gradient-to-r from-blue-400 to-purple-400 scale-125 shadow-lg'
+      : 'bg-slate-600 hover:bg-slate-500'
+      }`}
+      />
+      ))}
+    </div>
+
+    {/* Project Grid Preview */}
+    <div className="grid md:grid-cols-3 gap-6 mt-16">
+      {projects.map((project, index) => ( // Loop over original projects for grid
+      <button
+        key={index}
+        onClick={() => goToProject(index)}
+      className={`group relative overflow-hidden rounded-xl transition-all duration-300 ${
+      index === getActualIndex()
+      ? 'ring-2 ring-blue-400 scale-105'
+      : 'hover:scale-105 opacity-60 hover:opacity-100'
+      }`}
+      >
+      <img
+        src={project.image}
+        alt={project.title}
+        className="w-full h-32 object-cover group-hover:scale-110 transition-transform duration-300"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 p-4">
+        <h4 className="text-white font-semibold text-sm truncate">{project.title}</h4>
+      </div>
+      </button>
+      ))}
+    </div>
+</div>
+</section>
+
+{/* Connect Section */}
+<section id="connect" className="py-24 bg-gradient-to-br from-slate-900 to-blue-900">
+  <div className="container mx-auto px-6 text-center">
+    <h2 className="text-4xl md:text-5xl font-bold mb-8">
+      Let's <span className="text-purple-400">Connect</span>
+    </h2>
+    <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+      I'm always interested in new opportunities and collaborations.
+      Let's discuss how we can work together to bring your ideas to life.
+    </p>
+
+    <div className="flex justify-center gap-8 mb-12">
+      {[
+      { icon: Mail, href: "mailto:john@example.com", label: "Email" },
+      { icon: Linkedin, href: "https://linkedin.com/in/johnsmith", label: "LinkedIn" },
+      { icon: Github, href: "https://github.com/johnsmith", label: "GitHub" }
+      ].map(({ icon: Icon, href, label }) => (
+      <a
+        key={label}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group p-4 bg-slate-800 rounded-full hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all duration-300 hover:scale-110"
+      >
+        <Icon className="w-8 h-8 group-hover:text-white transition-colors" />
+      </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* Contact Form Section */}
+<section className="py-24 bg-slate-800">
+  <div className="container mx-auto px-6">
+    <div className="max-w-4xl mx-auto">
+      <div className="text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-bold mb-4">
+          Send Me a <span className="text-blue-400">Message</span>
+        </h2>
+        <p className="text-xl text-gray-300">
+          Have a project in mind? Let's discuss how we can work together.
+        </p>
+      </div>
+
+      <div className="grid lg:grid-cols-2 gap-12 items-start">
+        {/* Contact Info */}
+        <div className="space-y-8">
+          <div className="bg-slate-900 p-8 rounded-2xl">
+            <h3 className="text-2xl font-bold mb-8 text-white">Get in Touch</h3>
+            <div className="space-y-8">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white text-lg">Email</p>
+                  <p className="text-gray-300 mb-2">john.smith@example.com</p>
+                  <p className="text-sm text-gray-400">I typically respond within 24 hours</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white text-lg">Location</p>
+                  <p className="text-gray-300 mb-2">San Francisco, CA</p>
+                  <p className="text-sm text-gray-400">Available for remote work worldwide</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Calendar className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white text-lg">Availability</p>
+                  <p className="text-gray-300 mb-2">Monday - Friday, 9AM - 6PM PST</p>
+                  <p className="text-sm text-gray-400">Open to discuss flexible schedules</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Linkedin className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white text-lg">Professional Network</p>
+                  <a
+                    href="https://linkedin.com/in/johnsmith"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    linkedin.com/in/johnsmith
+                  </a>
+                  <p className="text-sm text-gray-400 mt-1">Connect with me professionally</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-slate-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Github className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="font-semibold text-white text-lg">Code Portfolio</p>
+                  <a
+                    href="https://github.com/johnsmith"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    github.com/johnsmith
+                  </a>
+                  <p className="text-sm text-gray-400 mt-1">Check out my latest projects</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Response Promise */}
+            <div className="mt-8 pt-6 border-t border-slate-700">
+              <div className="bg-gradient-to-r from-blue-600/10 to-purple-600/10 border border-blue-500/20 rounded-lg p-4">
+                <h4 className="font-semibold text-white mb-2">Quick Response Guarantee</h4>
+                <p className="text-sm text-gray-300">
+                  I understand the importance of timely communication. You can expect a response
+                  to your inquiry within 24 hours, often much sooner.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Form */}
+        <div className="bg-slate-900 p-8 rounded-2xl">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
+                  Your Name *
+                </label>
+                <Input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  className="bg-slate-800 border-slate-600 text-white placeholder-gray-400 focus:border-blue-500"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  Email Address *
+                </label>
+                <Input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="bg-slate-800 border-slate-600 text-white placeholder-gray-400 focus:border-blue-500"
+                  placeholder="john@example.com"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
+                Subject *
+              </label>
+              <Input
+                type="text"
+                id="subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleInputChange}
+                required
+                className="bg-slate-800 border-slate-600 text-white placeholder-gray-400 focus:border-blue-500"
+                placeholder="Project Discussion"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
+                Message *
+              </label>
+              <Textarea
+                id="message"
+                name="message"
+                rows={6}
+                value={formData.message}
+                onChange={handleInputChange}
+                required
+                className="bg-slate-800 border-slate-600 text-white placeholder-gray-400 focus:border-blue-500 resize-none"
+                placeholder="Tell me about your project and how I can help you..."
+              />
+            </div>
+
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-xl font-semibold text-lg transition-all duration-300 disabled:opacity-70"
+            >
+              {isSubmitting ? (
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Sending Message...
+              </div>
+              ) : (
+              'Send Message'
+              )}
+            </Button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* Footer */}
+<footer className="py-12 bg-slate-900 border-t border-slate-800">
+  <div className="container mx-auto px-6">
+    <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+      <p className="text-gray-400">
+        © 2024 John Smith. All rights reserved.
+      </p>
+      <div className="flex gap-6">
+        <a href="/privacy" className="text-gray-400 hover:text-white transition-colors">
+          Privacy Policy
+        </a>
+        <a href="/terms" className="text-gray-400 hover:text-white transition-colors">
+          Terms of Service
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+);
+}

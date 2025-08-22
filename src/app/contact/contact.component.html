@@ -1,0 +1,82 @@
+<section class="py-24 bg-slate-800">
+  <div class="container mx-auto px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">
+          {{contactContent?.title?.part1}} <span class="text-blue-400">{{contactContent?.title?.part2}}</span>
+        </h2>
+        <p class="text-xl text-gray-300">
+          {{contactContent?.description}}
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 items-start">
+        <!-- Contact Info -->
+        <div class="space-y-8">
+          <div class="bg-slate-900 p-8 rounded-2xl">
+            <h3 class="text-2xl font-bold mb-8 text-white">{{contactContent?.getInTouchTitle}}</h3>
+            <div class="space-y-8">
+              <div *ngFor="let info of contactContent?.info" class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" [ngClass]="info.bgColor">
+                  <lucide-icon [name]="info.icon" class="w-6 h-6 text-white"></lucide-icon>
+                </div>
+                <div>
+                  <p class="font-semibold text-white text-lg">{{ info.title }}</p>
+                  <p *ngIf="!info.isLink" class="text-gray-300 mb-2">{{ info.value }}</p>
+                  <a *ngIf="info.isLink" [href]="'https://' + info.value" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 transition-colors">
+                    {{ info.value }}
+                  </a>
+                  <p class="text-sm text-gray-400 mt-1">{{ info.description }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Response Promise -->
+            <div class="mt-8 pt-6 border-t border-slate-700">
+              <div class="bg-gradient-to-r from-blue-600/10 to-purple-600/10 border border-blue-500/20 rounded-lg p-4">
+                <h4 class="font-semibold text-white mb-2">{{contactContent?.quickResponse?.title}}</h4>
+                <p class="text-sm text-gray-300">
+                  {{contactContent?.quickResponse?.description}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="bg-slate-900 p-8 rounded-2xl">
+          <form (ngSubmit)="handleSubmit()" #contactForm="ngForm" class="space-y-6">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-300 mb-2">{{contactContent?.form?.nameLabel}}</label>
+                <input type="text" id="name" name="name" [(ngModel)]="formData.name" required class="bg-slate-800 border-slate-600 text-white placeholder-gray-400 focus:border-blue-500 w-full p-2 rounded-md" [placeholder]="contactContent?.form?.namePlaceholder">
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-300 mb-2">{{contactContent?.form?.emailLabel}}</label>
+                <input type="email" id="email" name="email" [(ngModel)]="formData.email" required class="bg-slate-800 border-slate-600 text-white placeholder-gray-400 focus:border-blue-500 w-full p-2 rounded-md" [placeholder]="contactContent?.form?.emailPlaceholder">
+              </div>
+            </div>
+
+            <div>
+              <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">{{contactContent?.form?.subjectLabel}}</label>
+              <input type="text" id="subject" name="subject" [(ngModel)]="formData.subject" required class="bg-slate-800 border-slate-600 text-white placeholder-gray-400 focus:border-blue-500 w-full p-2 rounded-md" [placeholder]="contactContent?.form?.subjectPlaceholder">
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-300 mb-2">{{contactContent?.form?.messageLabel}}</label>
+              <textarea id="message" name="message" rows="6" [(ngModel)]="formData.message" required class="bg-slate-800 border-slate-600 text-white placeholder-gray-400 focus:border-blue-500 resize-none w-full p-2 rounded-md" [placeholder]="contactContent?.form?.messagePlaceholder"></textarea>
+            </div>
+
+            <button type="submit" [disabled]="isSubmitting || contactForm.invalid" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-xl font-semibold text-lg transition-all duration-300 disabled:opacity-70">
+              <div *ngIf="isSubmitting" class="flex items-center justify-center gap-2">
+                <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                {{contactContent?.form?.submittingButton}}
+              </div>
+              <span *ngIf="!isSubmitting">{{contactContent?.form?.submitButton}}</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

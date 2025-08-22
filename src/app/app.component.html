@@ -1,9 +1,47 @@
-<div class="max-w-6xl mx-auto border border-gray-700 rounded-lg p-4 sm:p-8 bg-gradient-to-b from-orange-500 to-gray-900">
-  <app-header></app-header>
-  <app-hero></app-hero>
+<div class="min-h-screen bg-slate-900 text-white">
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full bg-slate-900/95 backdrop-blur-md z-50 border-b border-slate-800">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+        <div class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          {{navigation?.brand}}
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex space-x-8">
+          <button *ngFor="let item of navigation?.links"
+            (click)="scrollToSection(item)"
+            [class.text-blue-400]="activeSection === item"
+            [class.font-semibold]="activeSection === item"
+            [class.text-gray-300]="activeSection !== item"
+            class="capitalize transition-all duration-300 hover:text-blue-400">
+            {{item}}
+          </button>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button (click)="isMenuOpen = !isMenuOpen" class="md:hidden p-2 rounded-lg hover:bg-slate-800 transition-colors">
+          <lucide-icon *ngIf="!isMenuOpen" name="Menu" size="24"></lucide-icon>
+          <lucide-icon *ngIf="isMenuOpen" name="X" size="24"></lucide-icon>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div *ngIf="isMenuOpen" class="md:hidden absolute top-full left-0 w-full bg-slate-900 border-t border-slate-800 py-4">
+        <button *ngFor="let item of navigation?.links"
+          (click)="scrollToSection(item)"
+          class="block w-full text-left px-6 py-3 capitalize hover:bg-slate-800 transition-colors">
+          {{item}}
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <app-home></app-home>
   <app-about></app-about>
   <app-experience></app-experience>
   <app-projects></app-projects>
-  <app-socials></app-socials>
+  <app-connect></app-connect>
+  <app-contact></app-contact>
   <app-footer></app-footer>
 </div>

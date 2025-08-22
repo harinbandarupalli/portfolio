@@ -1,51 +1,121 @@
-<section>
-    <h2 class="text-3xl font-bold mb-6 text-center md:text-left">Featured Projects</h2>
-    <div #carousel class="carousel-container bg-gray-800/50 border border-gray-700 rounded-lg" (mouseenter)="stopAutoScroll()" (mouseleave)="startAutoScroll()">
-        <div #track class="carousel-track" (transitionend)="onTransitionEnd()">
-            <!-- Slide 1 -->
-            <div class="carousel-slide">
-                <div class="p-6 h-full flex flex-col md:flex-row items-center gap-8">
-                    <div class="w-full md:w-2/3 h-80 placeholder-box rounded-md"><span>Project 1 Screenshot</span></div>
-                    <div class="w-full md:w-1/3">
-                        <h3 class="text-2xl font-semibold text-orange-400">Project Title One</h3>
-                        <p class="mt-2 text-gray-400">Description for the first featured project. Duis aute irure dolor in reprehenderit.</p>
-                        <div class="mt-6 flex space-x-4">
-                            <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg">View Project</button>
-                            <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg">Case Study</button>
-                        </div>
-                    </div>
+<section id="projects" class="py-24 bg-slate-800">
+  <div class="container mx-auto px-6">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+      {{projectsContent?.title.split(' ')[0]}} <span class="text-blue-400">{{projectsContent?.title.split(' ')[1]}}</span>
+    </h2>
+
+    <div class="relative max-w-5xl mx-auto">
+      <!-- Main Carousel Container -->
+      <div class="relative overflow-hidden rounded-2xl bg-slate-900 shadow-2xl">
+        <div
+          class="flex"
+          [class.transition-transform]="transitionEnabled"
+          [class.duration-500]="transitionEnabled"
+          [class.ease-in-out]="transitionEnabled"
+          [style.transform]="getTransform()"
+        >
+          <div *ngFor="let project of extendedProjects; let i = index" class="w-full flex-shrink-0">
+            <div class="grid md:grid-cols-2 min-h-[500px]">
+              <!-- Project Image -->
+              <div class="relative overflow-hidden">
+                <img [src]="project.image" [alt]="project.title" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent"></div>
+              </div>
+
+              <!-- Project Info -->
+              <div class="p-8 md:p-12 flex flex-col justify-center space-y-6">
+                <div class="space-y-4">
+                  <h3 class="text-3xl md:text-4xl font-bold text-white leading-tight">
+                    {{ project.title }}
+                  </h3>
+                  <p class="text-lg text-gray-300 leading-relaxed">
+                    {{ project.description }}
+                  </p>
                 </div>
-            </div>
-            <!-- Slide 2 -->
-            <div class="carousel-slide">
-                <div class="p-6 h-full flex flex-col md:flex-row items-center gap-8">
-                    <div class="w-full md:w-2/3 h-80 placeholder-box rounded-md"><span>Project 2 Screenshot</span></div>
-                    <div class="w-full md:w-1/3">
-                        <h3 class="text-2xl font-semibold text-orange-400">Project Title Two</h3>
-                        <p class="mt-2 text-gray-400">Description for the second featured project. Consectetur adipiscing elit.</p>
-                        <div class="mt-6 flex space-x-4">
-                            <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg">View Project</button>
-                            <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg">Case Study</button>
-                        </div>
-                    </div>
+
+                <div class="flex flex-wrap gap-3">
+                  <span *ngFor="let tag of project.tags" class="px-4 py-2 bg-slate-700 text-blue-400 rounded-full text-sm font-medium border border-slate-600">
+                    {{ tag }}
+                  </span>
                 </div>
-            </div>
-            <!-- Slide 3 -->
-            <div class="carousel-slide">
-                <div class="p-6 h-full flex flex-col md:flex-row items-center gap-8">
-                    <div class="w-full md:w-2/3 h-80 placeholder-box rounded-md"><span>Project 3 Screenshot</span></div>
-                    <div class="w-full md:w-1/3">
-                        <h3 class="text-2xl font-semibold text-orange-400">Project Title Three</h3>
-                        <p class="mt-2 text-gray-400">Description for the third featured project. Sed do eiusmod tempor incididunt.</p>
-                        <div class="mt-6 flex space-x-4">
-                            <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg">View Project</button>
-                            <button class="w-full bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg">Case Study</button>
-                        </div>
-                    </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                  <a [href]="project.liveUrl" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 flex-1 py-3 rounded-xl font-semibold text-white flex items-center justify-center">
+                    <lucide-icon name="ExternalLink" class="w-5 h-5 mr-2"></lucide-icon> View Live Project
+                  </a>
+                  <button (click)="showCaseStudy(project)" class="border-2 border-slate-600 text-gray-300 hover:bg-slate-700 hover:border-slate-500 flex-1 py-3 rounded-xl font-semibold flex items-center justify-center">
+                    Read Case Study
+                  </button>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-        <button class="carousel-btn prev" (click)="handleManualNavigation('prev')">&#10094;</button>
-        <button class="carousel-btn next" (click)="handleManualNavigation('next')">&#10095;</button>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <button (click)="prevProject()" class="absolute left-6 top-1/2 transform -translate-y-1/2 bg-slate-900/90 hover:bg-slate-800 text-white p-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl z-10">
+        <lucide-icon name="ChevronLeft" class="w-6 h-6"></lucide-icon>
+      </button>
+      <button (click)="nextProject()" class="absolute right-6 top-1/2 transform -translate-y-1/2 bg-slate-900/90 hover:bg-slate-800 text-white p-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl z-10">
+        <lucide-icon name="ChevronRight" class="w-6 h-6"></lucide-icon>
+      </button>
     </div>
+
+    <!-- Dots Indicator -->
+    <div class="flex justify-center gap-3 mt-8">
+      <button *ngFor="let project of projects; let i = index"
+        (click)="goToProject(i)"
+        class="w-4 h-4 rounded-full transition-all duration-300"
+        [ngClass]="{'bg-gradient-to-r from-blue-400 to-purple-400 scale-125 shadow-lg': i === getActualIndex(), 'bg-slate-600 hover:bg-slate-500': i !== getActualIndex()}">
+      </button>
+    </div>
+
+    <!-- Project Grid Preview -->
+    <div class="grid md:grid-cols-4 gap-6 mt-16">
+      <button *ngFor="let project of projects; let i = index"
+        (click)="goToProject(i)"
+        class="group relative overflow-hidden rounded-xl transition-all duration-300"
+        [ngClass]="{'ring-2 ring-blue-400 scale-105': i === getActualIndex(), 'hover:scale-105 opacity-60 hover:opacity-100': i !== getActualIndex()}">
+        <img [src]="project.image" [alt]="project.title" class="w-full h-32 object-cover group-hover:scale-110 transition-transform duration-300" />
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-4">
+          <h4 class="text-white font-semibold text-sm truncate">{{ project.title }}</h4>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Case Study Modal -->
+  <div *ngIf="selectedCaseStudy" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm" (click)="closeCaseStudy()">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl max-w-3xl w-full p-8 md:p-12 space-y-6 relative" (click)="$event.stopPropagation()">
+      <button (click)="closeCaseStudy()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+        <lucide-icon name="X" class="w-8 h-8"></lucide-icon>
+      </button>
+
+      <h3 class="text-3xl font-bold text-white pr-10">{{ selectedCaseStudy.title }}</h3>
+
+      <div class="space-y-4 text-gray-300 leading-relaxed max-h-[60vh] overflow-y-auto pr-4">
+        <div>
+          <h4 class="text-xl font-semibold text-blue-400 mb-2">Problem</h4>
+          <p>{{ selectedCaseStudy.problem }}</p>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-semibold text-blue-400 mb-2">Solution</h4>
+          <p>{{ selectedCaseStudy.solution }}</p>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-semibold text-blue-400 mb-2">Results</h4>
+          <p>{{ selectedCaseStudy.results }}</p>
+        </div>
+
+        <div>
+          <h4 class="text-xl font-semibold text-blue-400 mb-2">Architecture</h4>
+          <p>{{ selectedCaseStudy.architecture }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

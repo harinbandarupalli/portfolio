@@ -1,0 +1,187 @@
+{
+  "navigation": {
+    "brand": "HB",
+    "links": ["home", "about", "experience", "projects", "connect"]
+  },
+  "home": {
+    "name": {
+      "first": "Harin",
+      "last": "Bandarupalli"
+    },
+    "tagline": "Full Stack Developer",
+    "description": "Delivering high-performance applications through expertise in both front-end and back-end technologies.",
+    "profileImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+    "buttons": {
+      "primary": "View My Work",
+      "secondary": "Download Resume"
+    }
+  },
+  "about": {
+    "title": "About Me",
+    "description1": "I'm a software engineer with a decade of experience, and I'm absolutely passionate about tackling complex problems and crafting innovative solutions! I'm a firm believer in writing clean, maintainable code that delivers a truly delightful and functional user experience.",
+    "description2": "I'm always eager to learn and embrace new challenges to further develop my skills. In my free time, you'll find me diving into the latest technologies through books and online courses, or perhaps unwinding with a captivating read or exploring new ideas on YouTube.",
+    "skills": ["Java", "JavaScript", "TypeScript", "Python","Angular", "Spring","JPA", "AWS","Docker"],
+    "workspaceImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=700&fit=crop"
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "jobs": [
+      {
+        "company": "FINRA",
+        "role": "Senior Software Engineer",
+        "duration": "May, 2020 - Present",
+        "location": "Rockville, MD",
+        "description": "Architecting and delivering scalable, cloud-native enterprise platforms with Angular, Spring Boot, and AWS. Leading development of microservices, event-driven pipelines, and serverless applications that process millions of regulatory cases with sub-second performance. Driving data intelligence through ETL pipelines, Aurora/PostgreSQL, and Power BI optimization, while mentoring teams and streamlining deployments with automated CI/CD.",
+        "highlights": ["Scaled microservices platform handling millions of cases.", "Built event-driven ETL system for centralized data.", "Developed 50+ secure REST microservices with SAML.","Implemented serverless AWS solutions for data management.","Automated deployments reducing errors by 20%."]
+      },
+      {
+        "company": "Hilton",
+        "role": "Backend Developer",
+        "duration": "October, 2019 - May, 2020",
+        "location": "Dallas, TX",
+        "description": "Architected and developed mission-critical microservices for a large-scale hospitality platform using Spring Boot, JPA, and MS SQL Server. Delivered high-performance, scalable backend solutions powering 7,300+ properties with reliable daily transaction processing and modular system architecture.",
+        "highlights": [
+          "Deployed ~30 new microservices",
+          "Built high-performance RESTful APIs",
+          "Optimized MS SQL Server schemas",
+          "Ensured 99.9% uptime for transactions",
+          "Improved system modularity and scalability"
+        ]
+      },
+      {
+        "company": "Anthem",
+        "role": "Full Stack Developer",
+        "duration": "Oct 2018 - Oct 2019",
+        "location": "Dallas, TX",
+        "description": "Architected and developed role-based microservices for healthcare platforms using Spring Boot and Angular, delivering HIPAA-compliant, personalized experiences for 40+ million members. Built secure APIs, integrated cross-functional data, and designed responsive frontend components for prescription management, claims tracking, and benefits access.",
+        "highlights": ["Architected role-based microservices for 40M members",
+          "Developed prescription management module in Angular",
+          "Engineered secure RESTful APIs with role-based access",
+          "Integrated data across pharmacy, claims, and member services",
+          "Built responsive, mobile-first frontend components"]
+      },
+      {
+        "company": "TracFone",
+        "role": "Backend Developer",
+        "duration": "March 2017 - Oct 2018",
+        "location": "Miami, FL",
+        "description": "Developed and deployed robust Spring and JPA microservices powering critical customer-facing features on the Net10 platform. Built dynamic API integrations with carrier systems, optimized core business processes, and enabled seamless customer lifecycle management for thousands of mobile users.",
+        "highlights": [ "Developed robust microservices for Net10 website",
+          "Built dynamic API integrations with carriers",
+          "Optimized customer lifecycle management processes",
+          "Enabled real-time transaction processing",
+          "Collaborated with carriers for reliable data exchange"]
+      }
+    ]
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "items": [
+      {
+        "title": "eShop",
+        "description": "Building a multi-component e-commerce app where users can purchase products after securely log in using OAuth",
+        "image": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&h=400&fit=crop",
+        "liveUrl": "https://example.com",
+        "caseStudyUrl": "https://example.com/case-study",
+        "tags": ["Spring Boot", "Java", "Postgres", "Angular","Typescript","Tailwind"],
+        "caseStudy": {
+          "title": "Case Study: eShop",
+          "problem": "The primary challenge was to create a seamless shopping experience for users. We needed to address user authentication, product management, performance, scalability, and engagement across multiple components.",
+          "solution": "We developed a modular, scalable architecture using modern web technologies. The front-end was built with Angular, featuring multiple components for product browsing, shopping cart, checkout, and user profiles. The back-end was powered by Spring Boot, providing secure APIs for authentication, order processing, and inventory management. Containerization with Docker and orchestration with Kubernetes ensured reliable deployment and scalability.",
+          "results": "The platform successfully launched, enabling users to browse, purchase, and manage products seamlessly. User engagement increased by 50%, order processing efficiency improved by 30%, and customer satisfaction was significantly enhanced.",
+          "architecture": "The application follows a microservices architecture. Angular SPA components include product catalog, shopping cart, checkout, and user profile modules. Backend services handle authentication, order management, inventory, and payment processing via RESTful APIs. Docker containers and Kubernetes orchestration ensure high availability and easy scaling."
+        }
+      },
+      {
+        "title": "EventHive",
+        "description": "Create, manage, and promote events while selling tickets seamlessly. Users can book, purchase, and track tickets effortlessly online.",
+        "image": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
+        "liveUrl": "https://example.com",
+        "caseStudyUrl": "https://example.com/case-study",
+        "tags": ["ExpressJs","MongoDb","Angular","Typescript","Tailwind"],
+        "caseStudy": {
+          "title": "Case Study: EventHive",
+          "problem": "The primary challenge was to build a seamless platform for creating and managing events, handling ticket sales, user authentication, and scalability for multiple events.",
+          "solution": "We developed a modular and scalable architecture using modern web technologies. The front-end was built with Angular, featuring components for event creation, ticket management, and user dashboards. The back-end was powered by Spring Boot, providing secure APIs for authentication, event management, and payment processing. Docker and Kubernetes ensured reliable deployment, scalability, and easy maintenance.",
+          "results": "The platform successfully launched, enabling users to create events, manage ticket inventories, and purchase tickets seamlessly. Event engagement increased significantly, ticket sales were efficiently processed, and user satisfaction improved.",
+          "architecture": "The application follows a microservices architecture. Angular SPA components include event creation, ticket management, user dashboards, and purchase workflows. Backend services handle authentication, event data, ticket inventory, and payment processing via RESTful APIs. Docker containers and Kubernetes orchestration ensure high availability and scalability."
+        }
+      },
+      {
+        "title": "Reddiary",
+        "description": "View top daily posts from your favorite subreddits in a calendar format, highlighting trends, insights, and discussions effortlessly.",
+        "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+        "liveUrl": "https://example.com",
+        "caseStudyUrl": "https://example.com/case-study",
+        "tags": ["go", "Angular", "Typescript", "Tailwind"],
+        "caseStudy": {
+          "title": "Case Study: Reddiary",
+          "problem": "The challenge was to provide users a way to visualize top Reddit posts by date, offering insights and trends in an intuitive calendar format.",
+          "solution": "We built a scalable Angular front-end with components for calendar view, daily highlights, and subreddit selection. The back-end, powered by Spring Boot, fetches and aggregates Reddit data via APIs. Users can view top posts per day, filter by subreddit, and explore content seamlessly. Docker and Kubernetes ensure smooth deployment and scalability.",
+          "results": "The platform launched successfully, allowing users to track daily Reddit trends easily. Engagement increased as users could explore popular posts by date, improving content discovery and user retention.",
+          "architecture": "The application follows a microservices architecture. Angular SPA components include calendar view, daily highlights, and subreddit filters. Backend services handle Reddit API integration, data aggregation, and caching via RESTful APIs. Docker containers and Kubernetes orchestration provide high availability and scalability."
+        }
+      },
+      {
+        "title": "Crypto Pulse",
+        "description": "Crypto Pulse is a real-time dashboard that tracks Ethereum and Coinbase trends. It visualizes market fluctuations and provides insights to help you stay ahead of the curve.",
+        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+        "liveUrl": "https://example.com",
+        "caseStudyUrl": "https://example.com/case-study",
+        "tags": ["Java", "Kafka", "Flink", "High Charts"],
+        "caseStudy": {
+          "title": "Case Study: Real-Time Cryptocurrency Trend Analysis with Crypto Pulse",
+          "problem": "Effectively tracking and visualizing real-time trends in the highly volatile cryptocurrency market was challenging for traders and enthusiasts.",
+          "solution":"The Crypto Pulse, a real-time dashboard that ingests live data from Ethereum and Coinbase. Kafka streams the incoming data, Apache Flink analyzes it, and the Angular front-end visualizes market trends dynamically, enabling users to track price changes, trading volume, and key market indicators.",
+          "results": "Users can monitor market fluctuations in real-time, identify trends instantly, and make informed trading or investment decisions based on live insights.",
+          "architecture": "Live cryptocurrency data is provided by third-party APIs. Kafka handles streaming ingestion, Flink performs real-time analytics, and Angular renders an interactive dashboard. The system is designed for low-latency, high-throughput data processing and scalable visualization."
+        }
+      }
+    ]
+  },
+  "connect": {
+    "title": "Let's Connect",
+    "description": "I'm always interested in new opportunities and collaborations. Let's discuss how we can work together to bring your ideas to life.",
+    "socialLinks": [
+      { "icon": "mail", "href": "mailto:harinbandarupalli@gmail.com", "label": "Email" },
+      { "icon": "linkedin", "href": "https://linkedin.com/in/harinb", "label": "LinkedIn" },
+      { "icon": "github", "href": "https://github.com/harinbandarupalli", "label": "GitHub" }
+    ]
+  },
+  "contact": {
+    "title": {
+      "part1": "Send Me a",
+      "part2": "Message"
+    },
+    "description": "Have a project in mind? Let's discuss how we can work together.",
+    "getInTouchTitle": "Get in Touch",
+    "info": [
+      { "icon": "mail", "title": "Email", "value": "Harinbandarupalli@gmail.com", "description": "I typically respond within 24 hours", "bgColor": "bg-blue-600" },
+      { "icon": "map-pin", "title": "Location", "value": "Frederick,MD", "description": "Available for remote work worldwide", "bgColor": "bg-purple-600" },
+      { "icon": "linkedin", "title": "Professional Network", "value": "linkedin.com/in/harinb", "description": "Connect with me professionally", "bgColor": "bg-orange-600", "isLink": true }
+    ],
+    "quickResponse": {
+      "title": "Quick Response Guarantee",
+      "description": "I understand the importance of timely communication. You can expect a response to your inquiry within 24 hours, often much sooner."
+    },
+    "form": {
+      "nameLabel": "Your Name *",
+      "namePlaceholder": "Max",
+      "emailLabel": "Email Address *",
+      "emailPlaceholder": "max@us.com",
+      "subjectLabel": "Subject *",
+      "subjectPlaceholder": "Project Discussion",
+      "messageLabel": "Message *",
+      "messagePlaceholder": "Tell me about your project and how I can help you...",
+      "submitButton": "Send Message",
+      "submittingButton": "Sending Message..."
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Harin Bandarupalli. All rights reserved.",
+    "links": [
+      { "title": "Privacy Policy", "url": "/privacy" },
+      { "title": "Terms of Service", "url": "/terms" }
+    ]
+  }
+}

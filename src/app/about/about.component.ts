@@ -1,31 +1,19 @@
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ScrollService } from '../scroll.service';
+import { Component, OnInit } from '@angular/core';
+import { ContentService } from '../content.service';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
-export class AboutComponent implements OnInit, OnDestroy {
-  private scrollSubscription!: Subscription;
+export class AboutComponent implements OnInit {
+  aboutContent: any;
 
-  constructor(
-    private scrollService: ScrollService,
-    private elementRef: ElementRef
-  ) {}
+  constructor(private contentService: ContentService) {}
 
-  ngOnInit(): void {
-    this.scrollSubscription = this.scrollService.scrollToSection$.subscribe(sectionId => {
-      if (sectionId === 'about') {
-        this.elementRef.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+  ngOnInit() {
+    this.contentService.getContent().subscribe(data => {
+      this.aboutContent = data.about;
     });
-  }
-
-  ngOnDestroy(): void {
-    if (this.scrollSubscription) {
-      this.scrollSubscription.unsubscribe();
-    }
   }
 }
