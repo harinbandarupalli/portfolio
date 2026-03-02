@@ -10,7 +10,7 @@
     },
     "tagline": "Full Stack Developer",
     "description": "Delivering high-performance applications through expertise in both front-end and back-end technologies.",
-    "profileImage": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+    "profileImage": "assets/Harin_profilePic.jpg",
     "buttons": {
       "primary": "View My Work",
       "secondary": "Download Resume"
