@@ -1,0 +1,264 @@
+{
+  "header": {
+    "name": "Harin Bandarupalli",
+    "links": [
+      { "label": "Home", "url": "#home" },
+      { "label": "Skills", "url": "#skills" },
+      { "label": "Projects", "url": "#projects" },
+      { "label": "Experience", "url": "#experience" },
+      { "label": "Connect", "url": "#connect" }
+    ],
+    "resumeLink": "assets/Harin-Resume.pdf"
+  },
+  "hero": {
+    "title": "Full Stack",
+    "subtitle": "Developer",
+    "description": "Building digital experiences with modern web technologies, crafting responsive interfaces and robust backends.",
+    "contactButton": "Contact Me",
+    "workButton": "Projects",
+    "profileImage": "assets/Harin_profilePic.jpg"
+  },
+  "experience": [
+    {
+      "role": "Senior Software Engineer",
+      "company": "Finra",
+      "duration": "May 2020 - Present",
+      "description": "Architecting case-processing modernization, unifying disparate legacy systems into a single centralized platform.",
+      "highlights": [
+        "Regulatory Data Consolidation: Architected a Spring Boot application to unify disparate case data from legacy (STAR), modern (RCM), and investigation (ICM) systems. Developed a real-time integration layer using AWS SNS to transform cross-system events into a single schema, achieving near real-time data availability and reducing report generation costs and processing time by 75%.",
+        "Universal Case Viewer: Implemented a high-performance interface using Angular, Spring Boot, and Material UI to unify case visibility across STAR, RCM, and ICM systems. Engineered a centralized 'Print-Ready' module that eliminated the need for redundant UI development across three platforms, reducing user navigation time by 30% and significantly cutting front-end engineering overhead for global staff.",
+        "Serverless Lookup Services: Architected a high-concurrency serverless architecture using AWS API Gateway and Lambda to centralize reference data across STAR, RCM, and ICM. Engineered a suite of generic, parameter-driven REST endpoints with integrated caching, eliminating data redundancy across three systems and resolving cross-system synchronization errors for downstream consumers.",
+        "Event Orchestration & Sequencing: Engineered a robust work-queue mechanism using Spring Boot and AWS to ingest and process high-volume events from the ICM system. Implemented version-based sequential processing to maintain strict data ordering, ensuring 100% data accuracy and state consistency for downstream integrated systems.",
+        "Quality Engineering & Test Automation: Orchestrated a comprehensive test strategy following the Test Pyramid to ensure end-to-end system reliability across RCM and ICM integrations. Achieved 90%+ unit test coverage using JUnit and Mockito, validated service boundaries through component tests with mocked external dependencies, and verified cross-system contracts via integration tests.",
+        "Cloud Infrastructure Automation: Architected the complete AWS infrastructure from the ground up for a multi-system case processing platform, authoring modular AWS CloudFormation templates to define and version all cloud resources as IaC."
+      ],
+      "icon": "rocket_launch"
+    },
+    {
+      "role": "Software Engineer",
+      "company": "Hilton",
+      "duration": "Oct 2019 - May 2020",
+      "description": "Engineered end-to-end features across guest-facing and internal hotel management platforms.",
+      "highlights": [
+        "Full-Stack Feature Development: Engineered end-to-end features across guest-facing and internal hotel management platforms using React and Spring Boot, collaborating with cross-functional teams to deliver UI enhancements and backend services that streamlined front desk and reservation workflows for hotel operations staff.",
+        "RESTful API Integration: Designed and implemented RESTful API integrations connecting front-end interfaces to backend hospitality systems, enforcing consistent data contracts and reducing manual data reconciliation overhead across property management and booking platforms.",
+        "Database Design & Query Optimization: Contributed to relational database schema design and query optimization for high-traffic reservation systems, improving query response times and ensuring transactional data integrity across concurrent booking and guest management operations.",
+        "Agile Delivery & Quality Engineering: Participated in full Agile sprint cycles — including sprint planning, code reviews, and retrospectives — while authoring unit and integration tests to uphold code quality standards and support a continuous delivery pipeline in a fast-paced hospitality technology environment."
+      ],
+      "icon": "hotel"
+    },
+    {
+      "role": "Software Engineer",
+      "company": "Anthem",
+      "duration": "Oct 2018 - Oct 2019",
+      "description": "Engineered a unified prescription view and automated refill and auto-pay enrollment workflows.",
+      "highlights": [
+        "Prescription Profile Aggregation: Engineered a unified prescription view on the member profile page by orchestrating parallel REST API calls to multiple pharmacy partner systems, consolidating medication history, refill status, and coverage data into a single Angular-rendered interface — eliminating the need for millions of members to call or visit a pharmacy to access their prescription information.",
+        "Auto-Refill & Auto-Pay Management: Implemented end-to-end auto-refill and auto-pay enrollment workflows using Angular Reactive Forms and RxJS, enabling members to activate automatic prescription refills and manage delivery addresses — all within a single self-service profile experience, reducing pharmacy support call volume significantly.",
+        "Angular UI Component Architecture: Architected and developed a reusable Angular component library for the member profile module leveraging Angular Material, reactive state management with NgRx, lazy-loaded feature modules, and RxJS observables for async data streams — ensuring a performant, accessible, and maintainable UI.",
+        "Quality Engineering & Test Coverage: Achieved 100% unit test coverage across all Angular components, services, and pipes using Jasmine and Karma, and authored comprehensive end-to-end test suites using Cypress to validate all prescription and payment flows — ensuring zero regression risk across member-facing release cycles."
+      ],
+      "icon": "medical_services"
+    },
+    {
+      "role": "Java Developer",
+      "company": "TracFone",
+      "duration": "March 2017 - Oct 2018",
+      "description": "Architected backend APIs for B2B brand launch and automated billing/proration logic.",
+      "highlights": [
+        "B2B Platform Engineering (Net10 Business): Architected and implemented backend APIs to launch the Net10 Business (B2B) brand, enabling vendor companies to manage bulk device fleets. Transitioned the system from a per-line individual model to an organizational account structure, allowing vendors to activate hundreds of devices simultaneously and significantly reducing onboarding time for enterprise clients.",
+        "Automated Billing & Proration Logic: Engineered complex proration and billing logic to align newly onboarded accounts with standard business cycles. Developed backend services to calculate pro-rated charges based on onboarding dates, ensuring seamless month-to-month billing transitions and 100% financial accuracy across multiple Tracfone brands including Straight Talk and Simple Mobile.",
+        "API Suite Development & Integration: Developed a comprehensive suite of RESTful endpoints to support device activation, account re-ups, and auto-enrollment features. These services provided the core infrastructure for the frontend, enabling a self-service portal where vendors could manage account lifecycles without manual intervention from Tracfone support staff.",
+        "Auto-Pay & Revenue Growth: Implemented the Auto-Pay enrollment feature across the Tracfone brand portfolio, improving customer retention and recurring revenue. By enabling automated device renewals and account management, the platform supported rapid business scaling, allowing vendors to launch operations like call centers in under a minute."
+      ],
+      "icon": "smartphone"
+    },
+    {
+      "role": "Software Engineer",
+      "company": "CA Technologies",
+      "duration": "March 2012 - Jan 2015",
+      "description": "Deployed Enterprise SSO and IAM implementations and led system upgrades.",
+      "highlights": [
+        "Enterprise SSO & IAM Implementation: Promoted from Junior to Software Engineer based on the successful deployment of Single Sign-On (SSO) solutions using CA SiteMinder r12.5. Engineered centralized access control for web resources and ERP systems, ensuring seamless authentication across multiple corporate cookie domains.",
+        "System Upgrades & Version Migration: Led the end-to-end upgrade of the SiteMinder infrastructure from legacy versions to r12.5. Managed the configuration of Policy Servers and Web Agents, conducting rigorous regression testing to ensure zero downtime for critical security gateways during the transition.",
+        "Adaptive Authentication & Federation: Architected secure B2B partner integrations by configuring Identity Federation via SAML 2.0. Enhanced security posture by integrating CA RiskFort and WebFort, implementing risk-based adaptive authentication to translate transaction risk scores into dynamic authorization decisions.",
+        "Production Support & Infrastructure Stability: Provided Tier 2/3 Production Support for global enterprise clients, troubleshooting complex session synchronization and authentication failures. Optimized High Availability (HA) configurations and load-balancing strategies to maintain 99.9% uptime for high-traffic security environments."
+      ],
+      "icon": "security"
+    }
+  ],
+  "skills": [
+    {
+      "category": "Languages",
+      "icon": "code",
+      "items": [
+        { "name": "Java", "icon": "devicon-java-plain", "isDevicon": true },
+        { "name": "Python", "icon": "devicon-python-plain", "isDevicon": true },
+        { "name": "JavaScript", "icon": "devicon-javascript-plain", "isDevicon": true },
+        { "name": "TypeScript", "icon": "devicon-typescript-plain", "isDevicon": true },
+        { "name": "SQL", "icon": "devicon-mysql-plain", "isDevicon": true },
+        { "name": "Kotlin", "icon": "devicon-kotlin-plain", "isDevicon": true },
+        { "name": "Groovy", "icon": "devicon-groovy-plain", "isDevicon": true }
+      ]
+    },
+    {
+      "category": "Frameworks",
+      "icon": "layers",
+      "items": [
+        { "name": "Spring Boot", "icon": "devicon-spring-plain", "isDevicon": true },
+        { "name": "Node.js", "icon": "devicon-nodejs-plain", "isDevicon": true },
+        { "name": "Express.js", "icon": "devicon-express-original", "isDevicon": true },
+        { "name": "Jest", "icon": "devicon-jest-plain", "isDevicon": true },
+        { "name": "JUnit", "icon": "fact_check", "isDevicon": false },
+        { "name": "BDD", "icon": "psychology", "isDevicon": false },
+        { "name": "Playwright", "icon": "devicon-playwright-plain", "isDevicon": true }
+      ]
+    },
+    {
+      "category": "Frontend",
+      "icon": "web",
+      "items": [
+        { "name": "Angular", "icon": "devicon-angularjs-plain", "isDevicon": true },
+        { "name": "React", "icon": "devicon-react-plain", "isDevicon": true },
+        { "name": "Material UI", "icon": "devicon-materialui-plain", "isDevicon": true },
+        { "name": "Redux", "icon": "devicon-redux-plain", "isDevicon": true }
+      ]
+    },
+    {
+      "category": "Cloud/DevOps",
+      "icon": "cloud",
+      "items": [
+        { "name": "AWS", "icon": "devicon-amazonwebservices-plain-wordmark", "isDevicon": true },
+        { "name": "ECS", "icon": "cloud_done", "isDevicon": false },
+        { "name": "Lambda", "icon": "functions", "isDevicon": false },
+        { "name": "S3", "icon": "storage", "isDevicon": false },
+        { "name": "Aurora", "icon": "database", "isDevicon": false },
+        { "name": "SNS/SQS", "icon": "queue", "isDevicon": false },
+        { "name": "API Gateway", "icon": "api", "isDevicon": false },
+        { "name": "Docker", "icon": "devicon-docker-plain", "isDevicon": true },
+        { "name": "CloudFormation", "icon": "account_tree", "isDevicon": false }
+      ]
+    },
+    {
+      "category": "Databases",
+      "icon": "database",
+      "items": [
+        { "name": "PostgreSQL", "icon": "devicon-postgresql-plain", "isDevicon": true },
+        { "name": "MongoDB", "icon": "devicon-mongodb-plain", "isDevicon": true },
+        { "name": "Redis", "icon": "devicon-redis-plain", "isDevicon": true },
+        { "name": "DynamoDB", "icon": "dataset", "isDevicon": false }
+      ]
+    },
+    {
+      "category": "Distributed Systems",
+      "icon": "device_hub",
+      "items": [
+        { "name": "Microservices", "icon": "hub", "isDevicon": false },
+        { "name": "REST APIs", "icon": "api", "isDevicon": false },
+        { "name": "Apache Flink", "icon": "devicon-apache-plain", "isDevicon": true },
+        { "name": "Amazon Kinesis", "icon": "waves", "isDevicon": false }
+      ]
+    },
+    {
+      "category": "CI/CD",
+      "icon": "rocket_launch",
+      "items": [
+        { "name": "Jenkins", "icon": "devicon-jenkins-plain", "isDevicon": true },
+        { "name": "Git", "icon": "devicon-git-plain", "isDevicon": true },
+        { "name": "Maven", "icon": "build", "isDevicon": false },
+        { "name": "SonarQube", "icon": "devicon-sonarqube-plain", "isDevicon": true },
+        { "name": "GitLab Actions", "icon": "devicon-gitlab-plain", "isDevicon": true },
+        { "name": "Woodpecker", "icon": "architecture", "isDevicon": false }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "BilboBag",
+      "description": "An e-commerce company which sells everything as a bag (cleaning bag, gardening bag).",
+      "detailedDescription": "BilboBag is your one-stop shop for everything bag-related! Whether you need a sturdy cleaning bag for your supplies, a durable gardening bag for your tools, or a stylish tote for your groceries, we've got you covered. Experience seamless shopping, secure checkout, and fast delivery.",
+      "tags": [
+        { "name": "React", "color": "text-blue-400" },
+        { "name": "Node.js", "color": "text-green-400" },
+        { "name": "Stripe", "color": "text-indigo-400" }
+      ],
+      "icon": "shopping_bag",
+      "image": "assets/Bilbo.jpg",
+      "link": "#"
+    },
+    {
+      "title": "eventHive",
+      "description": "A place where show hosts can sell tickets to an event, fill the form, create an event, and share the link.",
+      "detailedDescription": "eventHive empowers creators and hosts to manage their events effortlessly. With our platform, you can quickly create an event, customize details via a simple form, sell tickets directly to your audience, and generate shareable links. Perfect for workshops, concerts, and meetups!",
+      "tags": [
+        { "name": "Angular", "color": "text-red-400" },
+        { "name": "Firebase", "color": "text-yellow-400" },
+        { "name": "Tailwind", "color": "text-cyan-400" }
+      ],
+      "icon": "event",
+      "image": "assets/eventHive.png",
+      "link": "#"
+    },
+    {
+      "title": "Reddit Dairy",
+      "description": "Reads all the posts for a given day in a channel and creates a summary in your diary.",
+      "detailedDescription": "Ever missed out on top discussions in your favorite Reddit community? Reddit Dairy automatically scrapes the top posts from a specific subreddit for a given day and generates a clean, concise summary right into your digital diary. Stay caught up without endlessly scrolling!",
+      "tags": [
+        { "name": "Python", "color": "text-blue-300" },
+        { "name": "OpenAI API", "color": "text-green-300" },
+        { "name": "Reddit API", "color": "text-orange-400" }
+      ],
+      "icon": "book",
+      "image": "assets/reddit_dairy.png",
+      "link": "#"
+    },
+    {
+      "title": "Krypto Pulse",
+      "description": "Real-time dashboard for cryptocurrency, supporting Ethereum and Bitcoin.",
+      "detailedDescription": "Krypto Pulse is a blazing fast, real-time cryptocurrency dashboard. We currently track highly accurate, up-to-the-second data for Ethereum and Bitcoin. Visualize price trends, monitor volume, and stay ahead of the volatile crypto market with ease.",
+      "tags": [
+        { "name": "Vue.js", "color": "text-green-500" },
+        { "name": "WebSockets", "color": "text-purple-400" },
+        { "name": "Chart.js", "color": "text-pink-400" }
+      ],
+      "icon": "currency_bitcoin",
+      "image": "assets/krypto_pulse.png",
+      "link": "#"
+    }
+  ],
+  "contact": {
+    "title": "Ready to build your next big project.",
+    "description": "I'm currently available for full-time opportunities. Have a project in mind? Drop an email or fill the form !!",
+    "email": "harinbandarupalli@gmail.com",
+    "social": [
+      { "id": "linkedin", "icon": "devicon-linkedin-plain", "url": "https://www.linkedin.com/in/harinb", "isDevicon": true },
+      { "id": "github", "icon": "devicon-github-original", "url": "https://github.com/harinbandarupalli", "isDevicon": true }
+    ],
+    "form": {
+      "title": "Send a Message",
+      "fields": [
+        { "label": "Name", "placeholder": "Harin Bandarupalli", "type": "text" },
+        {
+          "label": "Email",
+          "placeholder": "harinbandarupalli@gmail.com",
+          "type": "email"
+        },
+        {
+          "label": "Message",
+          "placeholder": "Tell me about your project...",
+          "type": "textarea"
+        }
+      ],
+      "button": "Send Message"
+    }
+  },
+  "footer": {
+    "name": "Harin Bandarupalli",
+    "copyright": "© 2024 Harin Bandarupalli. All rights reserved.",
+    "links": [
+      { "label": "Home", "url": "#home" },
+      { "label": "Experience", "url": "#experience" },
+      { "label": "Projects", "url": "#projects" }
+    ]
+  }
+}
