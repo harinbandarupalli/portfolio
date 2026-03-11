@@ -175,7 +175,7 @@
   "projects": [
     {
       "title": "BilboBag",
-      "description": "A one-stop shop for all your bag and accessory needs, offering curated bundled products.",
+      "description": "A one-stop shop for all your bag and accessory needs, offering curated bundled products. (Initial load will take a min)",
       "detailedDescription": "BilboBag is your ultimate destination for bags and accessories. We specialize in bundled collections, where each themed bag comes fully stocked with multiple related products. Whether you're a registered user or checking out as a guest, you can easily purchase these curated product bags. Please note that items in a bag are sold exclusively as a bundle, not individually! (Note: As this application is deployed on a free tier, the initial load may take up to a minute.)",
       "tags": [
         { "name": "React", "color": "text-blue-400" },
