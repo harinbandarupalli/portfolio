@@ -186,7 +186,8 @@
       ],
       "icon": "shopping_bag",
       "image": "assets/Bilbo.jpg",
-      "link": "https://bilbobagin.netlify.app/"
+      "link": "https://bilbobagin.netlify.app/",
+      "githubLink": "https://github.com/harinbandarupalli/eShop"
     },
     {
       "title": "eventHive",
